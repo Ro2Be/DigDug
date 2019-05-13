@@ -6,12 +6,12 @@ namespace e
 	{
 	public:
 		AnimationComponent(const std::string& animationName);
-		void WakeUp(const GameObject* pParent) override;
+		virtual void WakeUp(const GameObject* pParent) override;
 		virtual void Update(const GameObject* pParent) override;
 	private:
 		TextureComponent* m_pTextureComponent;
-		char frameIndex;
-		float timer;
-		Animation* pAnimation;
+		char m_FrameIndex;
+		float m_Timer;
+		Animation* m_pAnimation;
 	};
 }

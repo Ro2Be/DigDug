@@ -11,12 +11,26 @@ namespace e
 		{
 			std::string name;
 			SVector resolution;
+			const float targetFrameRate;
 		};
+		//VARIABLES
+		static float dt;
+		//FUNCTIONS
+		static void Quit();
 		Game(const Settings& settings);
 		~Game() = default;
-		virtual void Load() const = 0;
+		void Run();
 		const Settings& GetSettings() const;
+	protected:
+		virtual void Load() const = 0;
 	private:
+		//VARIABLES
+		static bool m_Quit;
 		Settings m_Settings;
+		//FUNCTIONS
+		void Initialize();
+		void GameLoop();
+		void Terminate();
+		void Sleep(float milliseconds);
 	};
 }

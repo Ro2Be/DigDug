@@ -15,13 +15,15 @@ namespace e
 		Scene& operator=(const Scene& other) = delete;
 		Scene& operator=(Scene&& other) = delete;
 
-		void AddGameObject(const std::string& name, const std::vector<Component*>& pComponents);
+		GameObject* AddGameObject(const std::string& name, const std::vector<Component*>& pComponents);
+		GameObject* GetGameObject(const std::string& name);
+		void PrintGameObjectNames();
 		void WakeUp();
 		void Update();
 
 	private: 
 		std::string m_Name{};
-		std::map<std::string, std::shared_ptr<GameObject>> m_spNamedGameObjects;
-		std::vector<std::shared_ptr<GameObject>> m_spGameObjects;
+		std::vector<GameObject> m_GameObjects;
+		std::vector<std::string> m_GameObjectNames;
 	};
 }

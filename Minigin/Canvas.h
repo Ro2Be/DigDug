@@ -16,10 +16,11 @@ namespace e
 		void AddTextureComponent(TextureComponent* pTextureComponent);
 		void Render();
 		void Destroy();
-		SDL_Renderer* GetpRenderer();
+		SDL_Renderer* GetpRenderer() const;
 	private:
 		SDL_Window* m_pWindow{ nullptr };
 		SDL_Renderer* m_pRenderer{ nullptr };
+		//std::unordered_map<SDL_Texture*, std::vector<Frame>> m_TexturesBySDLTexture;
 		std::vector<TextureComponent*> m_pTextureComponents;
 	};
 }

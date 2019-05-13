@@ -10,18 +10,32 @@ namespace e
 		m_Name{ name }
 	{
 	}
-	void Scene::AddGameObject(const std::string& name, const std::vector<Component*>& pComponents)
+	GameObject* Scene::AddGameObject(const std::string& name, const std::vector<Component*>& pComponents)
 	{
-		UNREFERENCED_PARAMETER(name);
-		//m_spNamedGameObjects[name] = make_shared<GameObject>(pComponents);
-		m_spGameObjects.push_back(make_shared<GameObject>(pComponents));
+		m_GameObjects.push_back(pComponents);
+		m_GameObjectNames.push_back(name);
+		return &m_GameObjects.back();
+	}
+	GameObject* Scene::GetGameObject(const std::string& name)
+	{
+		for (int i{}; i < m_GameObjectNames.size(); ++i)
+		{
+			if (m_GameObjectNames[i] == name) return &m_GameObjects[i];
+		}
+		return nullptr;
+	}
+	void Scene::PrintGameObjectNames()
+	{
+		cout << "--- GAMEOBJECTS ---\n";
+		for (string name : m_GameObjectNames) cout << name << '\n';
+		cout << "-------------------\n\n";
 	}
 	void Scene::WakeUp()
 	{
-		for (shared_ptr<GameObject> spGameObject : m_spGameObjects) spGameObject->WakeUp();
+		for (GameObject& gameObject : m_GameObjects) gameObject.WakeUp();
 	}
 	void Scene::Update()
 	{
-		for (shared_ptr<GameObject> spGameObject : m_spGameObjects) spGameObject->Update();
+		for (GameObject& gameObject : m_GameObjects) gameObject.Update();
 	}
 }

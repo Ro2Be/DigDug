@@ -7,16 +7,15 @@ namespace e
 	{
 	public:
 		//GameObject() = default;
-		explicit GameObject(const std::vector<Component*>& pComponents);
+		GameObject(const std::vector<Component*>& pComponents);
 		~GameObject();
 		GameObject(const GameObject& other) = delete;
-		GameObject(GameObject&& other) = delete;
+		GameObject(GameObject&& other);
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
 		void WakeUp();
 		void Update();
-		void Add(Component* pC);
 
 	private:
 		std::vector<Component*> m_pComponents;

@@ -1,7 +1,5 @@
 #include "MiniginPCH.h"
 #include "GameObject.h"
-#include "TextureComponent.h"
-#include "Canvas.h"
 
 namespace e
 {
@@ -9,15 +7,15 @@ namespace e
 
 	GameObject::GameObject(const std::vector<Component*>& pComponents)
 	{
-		for (Component* pComponent : pComponents) Add(pComponent);
+		for(Component* pComponent : pComponents) m_pComponents.push_back(pComponent);
 	}
 	GameObject::~GameObject()
 	{
 		for (Component* pComponent : m_pComponents) delete pComponent;
 	}
-	void GameObject::Add(Component* pC)
+	GameObject::GameObject(GameObject&& other)
 	{
-		m_pComponents.push_back(pC);
+		m_pComponents = std::move(other.m_pComponents);
 	}
 	void GameObject::WakeUp()
 	{

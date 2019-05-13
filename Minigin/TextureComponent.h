@@ -8,23 +8,26 @@ namespace e
 	{
 	public:
 		TextureComponent();
-		TextureComponent(const std::string& textureName, const SDL_RendererFlip& flip = SDL_FLIP_NONE);
+		explicit TextureComponent(const std::string& textureName, const SDL_RendererFlip& flip = SDL_FLIP_NONE);
 		~TextureComponent() override = default;
 		//WAKEUP
 		void WakeUp(const GameObject* pParent) override;
+		//DRAW
+		void Draw(SDL_Renderer* pRenderer) const;
 		//GET
 		const SPoint& GetPosition() const;
-		const SVector& GetSize() const;
-		ExtraTexture* const GetpTexture() const;
-		const SDL_RendererFlip& GetRendererFlip() const;
+		SVector GetSize() const;
+		SDL_Texture*& GetpSDLTexture();
+		Frame& GetFrameRef();
 		//SET
 		void FlipHorizontal();
 		void FlipVertical();
-		void SetTexture(const std::string& textureName, bool adaptSize = true);
-		void SetTexture(ExtraTexture* pRuntimeTexture, bool adaptSize = true);
+		void SetTexture(SDL_Texture* texture, bool adaptSize = true);
+		void SetFrame(const Frame& frame, bool adaptSize = true);
 	private:
 		TransformComponent* m_pTransform;
-		ExtraTexture* m_pTexture;
-		SDL_RendererFlip m_RendererFlip;
+		SDL_Texture* m_pTexture;
+		Frame m_Frame;
+		SDL_RendererFlip m_Flip;
 	};
 }

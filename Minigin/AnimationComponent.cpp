@@ -1,16 +1,16 @@
 #include "MiniginPCH.h"
 #include "AnimationComponent.h"
 #include "ResourceManager.h"
-#include "Minigin.h"
+#include "Game.h"
 
 namespace e
 {	//TODO FIX
 	using namespace std;
 	AnimationComponent::AnimationComponent(const std::string& animationName) :
 		m_pTextureComponent{ nullptr },
-		frameIndex{},
-		timer{},
-		pAnimation{ ResourceManager::GetInstance().GetpAnimation(animationName) }
+		m_FrameIndex{ 0 },
+		m_Timer{},
+		m_pAnimation{ ResourceManager::GetInstance().GetpAnimation(animationName) }
 	{
 	}
 	void AnimationComponent::WakeUp(const GameObject* pParent)
@@ -18,18 +18,18 @@ namespace e
 		if (TextureComponent* pTextureComponent = pParent->GetpComponent<TextureComponent>())
 		{
 			m_pTextureComponent = pTextureComponent;
-			//if ((m_pTextureComponent->isActive = !m_spTextures.empty())) m_pTextureComponent->SetTexture(m_spTextures.front(), false);
+			m_pTextureComponent->SetFrame(m_pAnimation->frames[m_FrameIndex], false);
 		}
-		else throw runtime_error(string("Make sure TextComponent have a TextureComponent sibling!\n"));
+		else throw runtime_error(string("Make sure each TextComponent has a TextureComponent sibling!"));
 	}
 	void AnimationComponent::Update(const GameObject*)
 	{
-		timer -= Minigin::dt;
-		if (timer < 0)
+		m_Timer -= Game::dt;
+		if (m_Timer < 0)
 		{
-			if (pAnimation->frames.size() <= ++frameIndex) frameIndex = 0;
-			m_pTextureComponent->SetTexture(&pAnimation->frames[frameIndex], false);
-			timer += pAnimation->msPerFrame;
+			if (char(m_pAnimation->frames.size()) <= ++m_FrameIndex) m_FrameIndex = 0;
+			m_pTextureComponent->SetFrame(m_pAnimation->frames[m_FrameIndex], false);
+			m_Timer += m_pAnimation->msPerFrame;
 		}
 	}
 }

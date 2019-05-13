@@ -20,13 +20,16 @@
   <ItemGroup>
     <ClCompile Include="DigDug.cpp" />
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Pookah.cpp">
+    <ClCompile Include="TaizoHoriComponent.cpp">
       <Filter>Characters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Pookah.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="TaizoHoriComponent.h">
       <Filter>Characters</Filter>
     </ClInclude>
   </ItemGroup>

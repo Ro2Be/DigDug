@@ -1,8 +1,9 @@
 #pragma once
+#include <SDL_ttf.h>
 #include <SDL.h>
 //FVector, IVector, SVector
 //FPoint, IPoint, SPoint
-//Frame, Texture, Animation
+//Frame, Animation
 
 namespace e
 {
@@ -64,64 +65,30 @@ namespace e
 	};
 	struct Frame
 	{
-		SDL_Point center;
-		SDL_Rect source;
+		Frame() = default;
 		Frame(int x, int y, int w, int h) :
-			source{ x, y, w, h },
-			center{ w / 2, h / 2 }
-		{}
-		Frame(const SDL_Rect& source):
-			source{ source },
-			center{ source.w / 2, source.h / 2 }
-		{}
-		Frame(const SDL_Rect& source, const SDL_Point& center) :
+			source{ x, y, w, h }
+		{
+			center.x = source.w / 2;
+			center.y = source.h / 2;
+		}
+		Frame(SDL_Rect source) : 
+			source{ source }
+		{
+			center.x = source.w / 2; 
+			center.y = source.h / 2;
+		}
+		Frame(SDL_Rect source, SDL_Point center) :
 			source{ source },
 			center{ center }
-		{}
-	};
-	struct Texture
-	{
-		virtual void RenderCopy(SDL_Renderer* pRenderer, const SDL_Rect& destination, SDL_RendererFlip rendererFlip = SDL_RendererFlip::SDL_FLIP_NONE) = 0;
-	};
-	struct SimpleTexture final : public Texture
-	{
-		SDL_Texture* pSDLTexture;
-		SDL_Rect source;
-		virtual void RenderCopy(SDL_Renderer* pRenderer, const SDL_Rect& destination, SDL_RendererFlip) override
 		{
-			SDL_RenderCopy(pRenderer, pSDLTexture, &source, &destination);
 		}
-	};
-	struct ExtraTexture final : public Texture
-	{
-		SDL_Texture* pSDLTexture;
-		SDL_Rect source;
+		SDL_Rect  source;
 		SDL_Point center;
-		ExtraTexture():
-			Texture(),
-			pSDLTexture{},
-			source{},
-			center{}
-		{}
-		ExtraTexture(SDL_Texture* pSDLTexture, const SDL_Rect& source, const SDL_Point& center):
-			Texture(),
-			pSDLTexture{ std::move(pSDLTexture) },
-			source{ std::move(source) },
-			center{ std::move(center) }
-		{}
-		ExtraTexture(SDL_Texture* pSDLTexture, const Frame& frame) :
-			pSDLTexture{ std::move(pSDLTexture) },
-			source{ std::move(frame.source) },
-			center{ std::move(frame.center) }
-		{}
-		virtual void RenderCopy(SDL_Renderer* pRenderer, const SDL_Rect& destination, SDL_RendererFlip rendererFlip = SDL_RendererFlip::SDL_FLIP_NONE) override
-		{
-			SDL_RenderCopyEx(pRenderer, pSDLTexture, &source, &destination, NULL, &center, rendererFlip);
-		}
 	};
 	struct Animation
 	{
 		float msPerFrame;
-		std::vector<ExtraTexture> frames;
+		std::vector<Frame> frames;
 	};
 }

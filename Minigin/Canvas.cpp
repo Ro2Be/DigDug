@@ -27,24 +27,8 @@ namespace e
 	void Canvas::Render()
 	{
 		SDL_RenderClear(m_pRenderer);
-		//TODO: Add check if gameobject was deleted OR don't do this every frame
-		experimental::erase_if(m_pTextureComponents, [](TextureComponent* pTC) { return pTC == nullptr; });
-		for (TextureComponent* pTextureComponent : m_pTextureComponents)
-		{
-			if (pTextureComponent->isActive)
-			{
-				if (ExtraTexture* const pTexture = pTextureComponent->GetpTexture()) //TODO REMOVE IF, isActive should be false
-				{
-					SDL_Rect dst;
-					dst.x = pTextureComponent->GetPosition().x;
-					dst.y = pTextureComponent->GetPosition().y;
-					dst.w = pTextureComponent->GetSize().x;
-					dst.h = pTextureComponent->GetSize().y;
-					pTexture->RenderCopy(m_pRenderer, dst, pTextureComponent->GetRendererFlip());
-				}
-			}
-		}
-		while (m_pTextureComponents.back() == nullptr) m_pTextureComponents.pop_back();
+		experimental::erase(m_pTextureComponents, nullptr); //TODO: Add check if gameobject was deleted OR don't do this every frame
+		for (TextureComponent* pTextureComponent : m_pTextureComponents) if (pTextureComponent->isActive) pTextureComponent->Draw(m_pRenderer);
 		SDL_RenderPresent(m_pRenderer);
 	}
 	void Canvas::Destroy()
@@ -54,7 +38,7 @@ namespace e
 		SDL_DestroyWindow(m_pWindow);
 		m_pWindow = nullptr;
 	}
-	SDL_Renderer * Canvas::GetpRenderer()
+	SDL_Renderer* Canvas::GetpRenderer() const
 	{
 		return m_pRenderer;
 	}

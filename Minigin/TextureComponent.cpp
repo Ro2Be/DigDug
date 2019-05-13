@@ -10,14 +10,15 @@ namespace e
 	TextureComponent::TextureComponent():
 		m_pTransform{ nullptr },
 		m_pTexture{ nullptr },
-		m_RendererFlip{ SDL_RendererFlip::SDL_FLIP_NONE }
+		m_Frame{}
 	{
 		Canvas::GetInstance().AddTextureComponent(this); //Let the canvas know it has to render this component
 	}
 	TextureComponent::TextureComponent(const string& textureName, const SDL_RendererFlip& flip) :
 		m_pTransform{ nullptr },
-		m_pTexture{ ResourceManager::GetInstance().GetpTexture(textureName) },
-		m_RendererFlip{ flip }
+		m_pTexture{ ResourceManager::GetInstance().GetSDLTexture(textureName) },
+		m_Frame{ ResourceManager::GetInstance().GetFrame(textureName) },
+		m_Flip{ flip }
 	{
 		Canvas::GetInstance().AddTextureComponent(this); //Let the canvas know it has to render this component
 	}
@@ -26,48 +27,54 @@ namespace e
 		m_pTransform = pParent->GetpComponent<TransformComponent>();
 		if (m_pTransform == nullptr) throw runtime_error("TextureComponent needs a TransformComponent");
 	}
-	ExtraTexture* const TextureComponent::GetpTexture() const
-	{
-		return m_pTexture;
-	}
-	const SDL_RendererFlip& TextureComponent::GetRendererFlip() const
-	{
-		return m_RendererFlip;
-	}
 	const SPoint& TextureComponent::GetPosition() const
 	{
 		return m_pTransform->GetPosition();
 	}
-	const SVector & TextureComponent::GetSize() const
+	SVector TextureComponent::GetSize() const
 	{
-		return m_pTransform->GetSize();
+		return { short(float(m_Frame.source.w) * m_pTransform->GetScale().x), short(float(m_Frame.source.h) * m_pTransform->GetScale().y) };
+	}
+	Frame& TextureComponent::GetFrameRef()
+	{
+		return m_Frame;
+	}
+	SDL_Texture*& TextureComponent::GetpSDLTexture()
+	{
+		return m_pTexture;
 	}
 	void TextureComponent::FlipHorizontal()
 	{
-		m_RendererFlip = SDL_RendererFlip(m_RendererFlip ^ SDL_FLIP_HORIZONTAL);
+		m_Flip = SDL_RendererFlip(m_Flip ^ SDL_FLIP_HORIZONTAL);
 	}
 	void TextureComponent::FlipVertical()
 	{
-		m_RendererFlip = SDL_RendererFlip(m_RendererFlip ^ SDL_FLIP_VERTICAL);
+		m_Flip = SDL_RendererFlip(m_Flip ^ SDL_FLIP_VERTICAL);
 	}
-	void TextureComponent::SetTexture(const string& textureName, bool adaptSize)
+	void TextureComponent::SetTexture(SDL_Texture* texture, bool adaptSize)
 	{
-		m_pTexture = ResourceManager::GetInstance().GetpTexture(textureName);
+		m_pTexture = texture;
 		if (adaptSize)
 		{
-			IVector size;
-			SDL_QueryTexture(m_pTexture->pSDLTexture, nullptr, nullptr, &size.x, &size.y);
-			m_pTransform->SetSize(short(size.x), short(size.y));
+			SDL_QueryTexture(m_pTexture, nullptr, nullptr, &m_Frame.source.w, &m_Frame.source.h);
+			m_Frame.center = { m_Frame.source.w / 2, m_Frame.source.h / 2 };
+			m_pTransform->ResetScale();
 		}
 	}
-	void TextureComponent::SetTexture(ExtraTexture* pRuntimeTexture, bool adaptSize)
+	void TextureComponent::SetFrame(const Frame& frame, bool adaptSize)
 	{
-		m_pTexture = pRuntimeTexture;
-		if (adaptSize)
-		{
-			IVector size;
-			SDL_QueryTexture(m_pTexture->pSDLTexture, nullptr, nullptr, &size.x, &size.y);
-			m_pTransform->SetSize(short(size.x), short(size.y));
-		}
+		m_Frame = frame;
+		if (adaptSize) m_pTransform->ResetScale();
+	}
+	void TextureComponent::Draw(SDL_Renderer* pRenderer) const
+	{
+		const SPoint position{ GetPosition() };
+		const SVector size{ GetSize() };
+		SDL_Rect destination;
+		destination.x = position.x;
+		destination.y = position.y;
+		destination.w = size.x;
+		destination.h = size.y;
+		SDL_RenderCopyEx(pRenderer, m_pTexture, &m_Frame.source, &destination, NULL, &m_Frame.center, m_Flip);
 	}
 }

@@ -28,13 +28,22 @@
     <Filter Include="DataClasses">
       <UniqueIdentifier>{f8fe3919-4308-403c-ac81-fa387975700b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{951fdb01-7cc7-4e63-8d04-9caece017636}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Rendering">
+      <UniqueIdentifier>{b903ac52-34b8-4d06-88ed-ce92b3959a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics">
+      <UniqueIdentifier>{0dea4193-bb50-46a2-8879-1e3d8828f49e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{5fe020d7-0f6a-446a-835e-cd710b39afc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Managers</Filter>
@@ -48,17 +57,8 @@
     <ClInclude Include="Singleton.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="TextComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="FPSComponent.h">
       <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Minigin.h">
-      <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="MiniginPCH.h">
       <Filter>Main</Filter>
@@ -81,20 +81,11 @@
     <ClInclude Include="Structs.h">
       <Filter>DataClasses</Filter>
     </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>DataClasses</Filter>
-    </ClInclude>
     <ClInclude Include="Canvas.h">
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="Const.h">
       <Filter>DataClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="Inputs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Main</Filter>
@@ -105,11 +96,62 @@
     <ClInclude Include="Managers.h">
       <Filter>Managers</Filter>
     </ClInclude>
+    <ClInclude Include="InputDevice.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationComponent.h">
+      <Filter>Components\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureComponent.h">
+      <Filter>Components\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="TextComponent.h">
+      <Filter>Components\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="BodyComponent.h">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceFieldComponent.h">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="MassComponent.h">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeComponent.h">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>DataClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventNotifier.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EventObserver.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
@@ -119,19 +161,10 @@
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="TextComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="FPSComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="TextureComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Minigin.cpp">
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="MiniginPCH.cpp">
@@ -149,17 +182,50 @@
     <ClCompile Include="Structs.cpp">
       <Filter>DataClasses</Filter>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>DataClasses</Filter>
-    </ClCompile>
     <ClCompile Include="Canvas.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="InputDevice.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationComponent.cpp">
+      <Filter>Components\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="TextComponent.cpp">
+      <Filter>Components\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureComponent.cpp">
+      <Filter>Components\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="BodyComponent.cpp">
+      <Filter>Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceFieldComponent.cpp">
+      <Filter>Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="MassComponent.cpp">
+      <Filter>Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeComponent.cpp">
+      <Filter>Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="EventNotifier.cpp">
+      <Filter>Events</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
