@@ -16,7 +16,8 @@ namespace e
 
 	void BodyComponent::Update(const GameObject*)
 	{
-		m_pTransformComponent->AddMovement({ short(float(m_Velocity.x) * Game::dt), short(float(m_Velocity.y) * Game::dt) });
+		m_pTransformComponent->position.x += short(float(m_Velocity.x) * Game::dt);
+		m_pTransformComponent->position.y += short(float(m_Velocity.y) * Game::dt);
 	}
 
 	void BodyComponent::SetVelocity(const SVector & velocity)

@@ -18,8 +18,8 @@ namespace e
 		//FUNCTIONS
 		static void Quit();
 		Game(const Settings& settings);
-		~Game() = default;
-		void Run();
+		virtual ~Game() = default;
+		void Run() const;
 		const Settings& GetSettings() const;
 	protected:
 		virtual void Load() const = 0;
@@ -28,9 +28,9 @@ namespace e
 		static bool m_Quit;
 		Settings m_Settings;
 		//FUNCTIONS
-		void Initialize();
-		void GameLoop();
-		void Terminate();
-		void Sleep(float milliseconds);
+		void Initialize() const;
+		void GameLoop() const;
+		static void Terminate();
+		static void Sleep(float milliseconds);
 	};
 }

@@ -17,7 +17,7 @@ namespace e
 		{
 			switch (m_SDLEvent.type)
 			{
-			case SDL_QUIT:
+			case SDL_QUIT :
 				Game::Quit();
 				break;
 			case SDL_KEYDOWN :

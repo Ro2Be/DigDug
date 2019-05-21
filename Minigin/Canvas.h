@@ -13,7 +13,7 @@ namespace e
 	{
 	public:
 		void Init(const std::string& title, const SVector& resolution);
-		void AddTextureComponent(TextureComponent* pTextureComponent);
+		void AddRenderableComponent(RenderableComponent* pTextureComponent);
 		void Render();
 		void Destroy();
 		SDL_Renderer* GetpRenderer() const;
@@ -21,6 +21,6 @@ namespace e
 		SDL_Window* m_pWindow{ nullptr };
 		SDL_Renderer* m_pRenderer{ nullptr };
 		//std::unordered_map<SDL_Texture*, std::vector<Frame>> m_TexturesBySDLTexture;
-		std::vector<TextureComponent*> m_pTextureComponents;
+		std::vector<RenderableComponent*> m_pRenderableComponents;
 	};
 }

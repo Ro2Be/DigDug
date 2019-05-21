@@ -40,16 +40,16 @@ namespace e
 	}
 	void TextComponent::SetTexture() const
 	{
-		if (SDL_Surface* pSurface = TTF_RenderText_Blended(m_pFont, m_Text.c_str(), m_Color))
+		if (SDL_Surface* pSurface{ TTF_RenderText_Blended(m_pFont, m_Text.c_str(), m_Color) })
 		{
-			if (SDL_Texture* pSDLTexture = SDL_CreateTextureFromSurface(Canvas::GetInstance().GetpRenderer(), pSurface))
+			if (SDL_Texture* pSDLTexture{ SDL_CreateTextureFromSurface(Canvas::GetInstance().GetpRenderer(), pSurface) })
 			{
 				SDL_FreeSurface(pSurface); //FREE THE SURFACE
-				if (SDL_Texture* pTexture = m_pTextureComponent->GetpSDLTexture()) SDL_DestroyTexture(pTexture); //DESTROY PREVIOUS SDL_TEXTURE
+				m_pTextureComponent->DestroyTexture(); //DESTROY PREVIOUS SDL_TEXTURE
 				m_pTextureComponent->SetTexture(pSDLTexture); //SET THE TEXTURE
 			}
 			else throw runtime_error(string("Failed to create texture from surface: ") + SDL_GetError());
 		}
-		else throw runtime_error(string("Render text failed: ") + SDL_GetError());
+		else throw runtime_error(string("Failed to create surface from font: ") + SDL_GetError());
 	}
 }

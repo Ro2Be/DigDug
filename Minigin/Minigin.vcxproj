@@ -191,7 +191,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AnimationComponent.h" />
+    <ClInclude Include="AnimatorComponent.h" />
     <ClInclude Include="BodyComponent.h" />
     <ClInclude Include="Chrono.h" />
     <ClInclude Include="Command.h" />
@@ -209,27 +209,25 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClInclude Include="InputDevice.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="Log.h" />
     <ClInclude Include="Managers.h" />
     <ClInclude Include="MassComponent.h" />
     <ClInclude Include="MiniginPCH.h" />
     <ClInclude Include="Canvas.h" />
-    <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="RenderableComponent.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="Shape.h" />
-    <ClInclude Include="ShapeComponent.h" />
+    <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TextComponent.h" />
     <ClInclude Include="TextureComponent.h" />
-    <ClInclude Include="TileMap.h" />
+    <ClInclude Include="TileMapComponent.h" />
     <ClInclude Include="TransformComponent.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AnimationComponent.cpp" />
+    <ClCompile Include="AnimatorComponent.cpp" />
     <ClCompile Include="BodyComponent.cpp" />
     <ClCompile Include="Chrono.cpp" />
     <ClCompile Include="Controller.cpp" />
@@ -241,7 +239,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClCompile Include="InputDevice.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="Log.cpp" />
     <ClCompile Include="MassComponent.cpp" />
     <ClCompile Include="MiniginPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -251,11 +248,11 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MiniginPCH.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Canvas.cpp" />
-    <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="RenderableComponent.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="ShapeComponent.cpp" />
+    <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Structs.cpp" />
     <ClCompile Include="TextComponent.cpp" />
     <ClCompile Include="TextureComponent.cpp" />

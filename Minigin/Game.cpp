@@ -25,14 +25,14 @@ namespace e
 		return m_Settings;
 	}
 
-	void Game::Run()
+	void Game::Run() const
 	{
 		Initialize();
 		GameLoop();
 		Terminate();
 	}
 
-	void Game::Initialize()
+	void Game::Initialize() const
 	{
 		ResourceManager::GetInstance().Init(m_Settings.name);
 		Canvas::GetInstance().Init(m_Settings.name, m_Settings.resolution);
@@ -40,7 +40,7 @@ namespace e
 		SceneManager::GetInstance().WakeUp(); //WakeUp all gameObjects and components
 	}
 
-	void Game::GameLoop()
+	void Game::GameLoop() const
 	{
 		auto& canvas{ Canvas::GetInstance() };
 		auto& sceneManager{ SceneManager::GetInstance() };
@@ -55,13 +55,11 @@ namespace e
 			dt = chrono.GetSet();
 		}
 	}
-
 	void Game::Terminate()
 	{
 		Canvas::GetInstance().Destroy();
 		SDL_Quit();
 	}
-
 	void Game::Sleep(float milliseconds)
 	{
 		std::this_thread::sleep_for(std::chrono::milliseconds(long long(milliseconds)));

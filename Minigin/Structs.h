@@ -1,9 +1,10 @@
 #pragma once
 #include <SDL_ttf.h>
 #include <SDL.h>
+#include <vector>
 //FVector, IVector, SVector
 //FPoint, IPoint, SPoint
-//Frame, Animation
+//Frame, Animation, TileSet
 
 namespace e
 {
@@ -30,8 +31,8 @@ namespace e
 	};
 	struct SVector
 	{
-		short int x;
-		short int y;
+		short x;
+		short y;
 		//SVector(int x, int y) : x{ x }, y{ y } {}
 		SVector operator+(const SVector& v) const;
 		SVector& operator+=(const SVector& v);
@@ -57,8 +58,8 @@ namespace e
 	};
 	struct SPoint
 	{
-		short int x;
-		short int y;
+		short x;
+		short y;
 		//SPoint(int x, int y) : x{ x }, y{ y } {}
 		SPoint operator+(const SVector& v) const;
 		SPoint& operator+=(const SVector& v);
@@ -90,5 +91,20 @@ namespace e
 	{
 		float msPerFrame;
 		std::vector<Frame> frames;
+	};
+	struct TileSet
+	{
+		TileSet(const SPoint& start, const SVector& tileSize, char tileAmount, char columns = 1) :
+			sources{ tileAmount }
+		{
+			for (char tileIndex{}; tileIndex < tileAmount; ++tileIndex)
+			{
+				sources[tileIndex].x = start.x + (tileIndex % columns) * tileSize.x;
+				sources[tileIndex].y = start.y + (tileIndex / columns) * tileSize.y;
+				sources[tileIndex].w = tileSize.x;
+				sources[tileIndex].h = tileSize.y;
+			}
+		}
+		std::vector<SDL_Rect> sources;
 	};
 }

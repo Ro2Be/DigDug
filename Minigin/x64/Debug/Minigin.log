@@ -1,6 +1,30 @@
-﻿  AnimationComponent.cpp
-ShapeComponent.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-Log.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+﻿  MiniginPCH.cpp
+  AnimatorComponent.cpp
+  BodyComponent.cpp
+  Chrono.cpp
+  Controller.cpp
+  EventNotifier.cpp
+  ForceFieldComponent.cpp
+  FPSComponent.cpp
+  Game.cpp
+  GameObject.cpp
+  InputDevice.cpp
+  InputManager.cpp
+  Keyboard.cpp
+  MassComponent.cpp
+  Canvas.cpp
+  RenderableComponent.cpp
+  ResourceManager.cpp
+  Scene.cpp
+  SceneManager.cpp
+  ColliderComponent.cpp
+  Structs.cpp
+  Generating Code...
+  Compiling...
+  TextComponent.cpp
+  TextureComponent.cpp
+  TransformComponent.cpp
+  Generating Code...
   Minigin.vcxproj -> C:\Users\d-rob\Documents\GitHub\DigDug\x64\Debug\Minigin.lib
   C:\Users\d-rob\Documents\GitHub\DigDug\3rdParty\SDL2\lib\x64\SDL2.dll
   1 File(s) copied

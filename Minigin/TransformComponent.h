@@ -4,40 +4,39 @@
 
 namespace e
 {
+	enum Flip { o = 0x00000000, x = 0x00000001, y = 0x00000002, xy = 0x00000003 };
 	class TransformComponent final : public Component
 	{
 	public:
 		explicit TransformComponent(short x = 0, short y = 0, float scale = 1);
 		explicit TransformComponent(const SPoint& position = { 0, 0 }, float scale = 1);
-		void SetPosition(short x, short y);
-		void SetPosition(const SPoint& position);
-		void AddMovement(short x, short y);
-		void AddMovement(const SVector& movement);
 		void ResetScale();
-		void SetScale(const FVector& scale);
-		void Scale(const float& scale);
-		void Scale(const FVector& scale);
-		const SPoint&  GetPosition() const;
-		const FVector& GetScale() const;
+		void Scale(const float& scalar);
+		void Scale(const FVector& scalars);
 		Command* CreateMoveCommand(const SVector& movement);
-	private:
-		SPoint m_Position;
-		float m_Depth;
-		FVector m_Scale;
-		float m_Rotation;
+		//Variables
+		SPoint position;
+		FVector scale;
+		short rotation;
+		Flip flip;
 	
 		//COMMANDS
-		class CommandMove: public Command
+		class MoveCommand final : public Command
 		{
 		public:
-			CommandMove(TransformComponent* pTransformComponent, const SVector& movement) : 
+			MoveCommand(TransformComponent* pTransformComponent, const SVector& movement) : 
 				m_pTransformComponent{ pTransformComponent },
 				m_Movement{ movement }
 			{}
 			void SetMovement(SVector movement) { m_Movement = movement; };
 			virtual void Execute() override
 			{
-				m_pTransformComponent->AddMovement(m_Movement);
+				m_pTransformComponent->position += m_Movement;
+				int flipX{ 0 < m_Movement.x ? Flip::o : Flip::x };
+				if (0 == m_Movement.x) flipX &= m_pTransformComponent->flip; //neutralize flipping
+				int flipY{ 0 < m_Movement.y ? Flip::o : Flip::y };
+				if (0 == m_Movement.y) flipY &= m_pTransformComponent->flip; //neutralize flipping
+				m_pTransformComponent->flip = e::Flip(flipX | flipY);
 			}
 		private:
 			TransformComponent* m_pTransformComponent;

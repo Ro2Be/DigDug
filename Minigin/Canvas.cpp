@@ -20,15 +20,15 @@ namespace e
 		m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 		if (m_pRenderer == nullptr) throw runtime_error(std::string("SDL_CreateRenderer Error: ") + SDL_GetError());
 	}
-	void Canvas::AddTextureComponent(TextureComponent* pTextureComponent)
+	void Canvas::AddRenderableComponent(RenderableComponent* pTextureComponent)
 	{
-		m_pTextureComponents.push_back(pTextureComponent);
+		m_pRenderableComponents.push_back(pTextureComponent);
 	}
 	void Canvas::Render()
 	{
 		SDL_RenderClear(m_pRenderer);
-		experimental::erase(m_pTextureComponents, nullptr); //TODO: Add check if gameobject was deleted OR don't do this every frame
-		for (TextureComponent* pTextureComponent : m_pTextureComponents) if (pTextureComponent->isActive) pTextureComponent->Draw(m_pRenderer);
+		experimental::erase(m_pRenderableComponents, nullptr); //TODO: Add check if gameobject was deleted OR don't do this every frame
+		for (RenderableComponent* pRenderableComponent : m_pRenderableComponents) if (pRenderableComponent->isActive) pRenderableComponent->Draw(m_pRenderer);
 		SDL_RenderPresent(m_pRenderer);
 	}
 	void Canvas::Destroy()
