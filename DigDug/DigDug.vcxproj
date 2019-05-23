@@ -163,12 +163,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DieStateComponent.h" />
+    <ClInclude Include="DigDugComponents.h" />
+    <ClInclude Include="HealthDisplayComponent.h" />
+    <ClInclude Include="DefaultStateComponent.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Pookah.h" />
     <ClInclude Include="TaizoHoriComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DieStateComponent.cpp" />
     <ClCompile Include="DigDug.cpp" />
+    <ClCompile Include="HealthDisplayComponent.cpp" />
+    <ClCompile Include="DefaultStateComponent.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

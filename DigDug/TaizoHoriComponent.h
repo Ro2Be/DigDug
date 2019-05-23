@@ -1,27 +1,22 @@
 #pragma once
 #include <Component.h>
-#include "TransformComponent.h"
-#include "TextureComponent.h"
-#include "Command.h"
+#include "Event.h"
 #include "ColliderComponent.h"
-
-class TaizoHoriCollisionHandler final : public e::CollisionHandler
-{
-public:
-	~TaizoHoriCollisionHandler() override = default;
-	void HandleCollision(const e::GameObject* pOtherGameObject) override;
-};
+#include "StateComponent.h"
+//COMPONENT
 
 class TaizoHoriComponent final : public e::Component
 {
 public:
 	//FUNCTIONS
-	TaizoHoriComponent();
-	~TaizoHoriComponent() override;
+	TaizoHoriComponent() = default;
+	~TaizoHoriComponent() override = default;
 	virtual void WakeUp(const e::GameObject* pParent) override;
-	void Update(const e::GameObject* parent) override;
+	virtual void Update(const e::GameObject*) override;
 private:
 	//VARIABLES
-	TaizoHoriCollisionHandler* m_pCollisionHandler;
-	e::ColliderComponent* m_pColliderComponent;
+	e::EventNotifier m_Notifier;
 };
+
+//EVENTS
+struct DeathEvent final : public e::Event{};

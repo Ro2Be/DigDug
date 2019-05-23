@@ -16,12 +16,8 @@ namespace e
 	}
 	void TextComponent::WakeUp(const GameObject* pParent)
 	{
-		if (TextureComponent* pTextureComponent = pParent->GetpComponent<TextureComponent>())
-		{
-			m_pTextureComponent = pTextureComponent;
-			if ((m_pTextureComponent->isActive = !m_Text.empty())) SetTexture();
-		}
-		else throw runtime_error(string("Make sure TextComponent have a TextureComponent sibling!\n"));
+		m_pTextureComponent = pParent->GetpComponent<TextureComponent>("Make sure TextComponent have a TextureComponent sibling!\n");
+		if ((m_pTextureComponent->isActive = !m_Text.empty())) SetTexture();
 	}
 	void TextComponent::SetFont(const std::string& fontName, const unsigned fontSize)
 	{

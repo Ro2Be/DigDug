@@ -28,12 +28,8 @@ namespace e
 	}
 	void AnimatorComponent::WakeUp(const GameObject* pParent)
 	{
-		if (TextureComponent* pTextureComponent = pParent->GetpComponent<TextureComponent>())
-		{
-			m_pTextureComponent = pTextureComponent;
-			m_pTextureComponent->SetFrame(m_pAnimations[m_AnimationIndex]->frames[m_FrameIndex], false);
-		}
-		else throw runtime_error(string("Make sure each TextComponent has a TextureComponent sibling!"));
+		m_pTextureComponent = pParent->GetpComponent<TextureComponent>("Make sure each TextComponent has a TextureComponent sibling!");
+		m_pTextureComponent->SetFrame(m_pAnimations[m_AnimationIndex]->frames[m_FrameIndex], false);
 	}
 	void AnimatorComponent::Update(const GameObject*)
 	{
@@ -45,14 +41,27 @@ namespace e
 			m_Timer += m_pAnimations[m_AnimationIndex]->msPerFrame;
 		}
 	}
+	void AnimatorComponent::FlipHorizontal() const
+	{
+		//TODO WHY IS THIS HERE
+	}
+	void AnimatorComponent::FlipVertical() const
+	{
+		//TODO WHY IS THIS HERE
+	}
 	void AnimatorComponent::SetFrame(const unsigned char frameIndex)
 	{
 		m_FrameIndex = frameIndex;
+		m_Timer = m_pAnimations[m_AnimationIndex]->msPerFrame;
 		m_pTextureComponent->SetFrame(m_pAnimations[m_AnimationIndex]->frames[m_FrameIndex], false);
 	}
 	void AnimatorComponent::SetAnimation(const unsigned char animationIndex)
 	{
 		m_AnimationIndex = animationIndex;
 		SetFrame(0);
+	}
+	Animation* AnimatorComponent::GetpAnimation() const
+	{
+		return m_pAnimations[m_AnimationIndex];
 	}
 }

@@ -31,12 +31,15 @@ namespace e
 			void SetMovement(SVector movement) { m_Movement = movement; };
 			virtual void Execute() override
 			{
-				m_pTransformComponent->position += m_Movement;
-				int flipX{ 0 < m_Movement.x ? Flip::o : Flip::x };
-				if (0 == m_Movement.x) flipX &= m_pTransformComponent->flip; //neutralize flipping
-				int flipY{ 0 < m_Movement.y ? Flip::o : Flip::y };
-				if (0 == m_Movement.y) flipY &= m_pTransformComponent->flip; //neutralize flipping
-				m_pTransformComponent->flip = e::Flip(flipX | flipY);
+				if(m_pTransformComponent->isActive)
+				{
+					m_pTransformComponent->position += m_Movement;
+					int flipX{ 0 < m_Movement.x ? Flip::o : Flip::x };
+					if (0 == m_Movement.x) flipX &= m_pTransformComponent->flip; //neutralize flipping
+					int flipY{ 0 < m_Movement.y ? Flip::o : Flip::y };
+					if (0 == m_Movement.y) flipY &= m_pTransformComponent->flip; //neutralize flipping
+					m_pTransformComponent->flip = e::Flip(flipX | flipY);
+				}
 			}
 		private:
 			TransformComponent* m_pTransformComponent;

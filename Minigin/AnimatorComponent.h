@@ -17,6 +17,7 @@ namespace e
 		void FlipVertical() const;
 		void SetFrame(const unsigned char frameIndex);
 		void SetAnimation(const unsigned char animationIndex);
+		Animation* GetpAnimation() const;
 	private:
 		TextureComponent* m_pTextureComponent;
 		unsigned char m_FrameIndex;

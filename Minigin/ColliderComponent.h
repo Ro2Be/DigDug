@@ -3,23 +3,22 @@
 #include <unordered_map>
 namespace e
 {
-	class ColliderComponent;
-
-	class CollisionHandler
+	class CollisionHandler abstract
 	{
 	public:
 		virtual ~CollisionHandler() = default;
-		virtual void HandleCollision(const GameObject* pOtherGameObject) = 0;
+		virtual void HandleCollision(const e::GameObject* pGameObject, const GameObject* pOtherGameObject) = 0;
 	};
 
-	class ColliderComponent : public Component
+	class ColliderComponent final : public Component
 	{
 	public:
 		explicit ColliderComponent(const std::string& colliderGroup);
 		virtual ~ColliderComponent() override;
 		virtual void WakeUp(const GameObject* pParent) override;
+		virtual void Update(const GameObject*) override;
 		const GameObject* GetpGameObject() const;
-		void HandleCollision(const std::string& colliderGroup, CollisionHandler*) const;
+		void HandleCollision(CollisionHandler* collisionHandler, const std::string& colliderGroup) const;
 		SPoint GetTopLeft() const;
 		SPoint GetBottomRight() const;
 	private:
@@ -29,10 +28,7 @@ namespace e
 		SVector m_BottomRight{};	//relative to transform component
 
 		static std::unordered_map<std::string, std::vector<ColliderComponent*>> ColliderGroupsByName;
-		static bool IsCollision(const ColliderComponent* pColliderComponent0, const ColliderComponent* pColliderComponent1)
-		{
-			return pColliderComponent0->GetTopLeft().x <= pColliderComponent1->GetBottomRight().x && pColliderComponent0->GetTopLeft().y <= pColliderComponent1->GetBottomRight().y
-				&& pColliderComponent1->GetTopLeft().x <= pColliderComponent0->GetBottomRight().x && pColliderComponent1->GetTopLeft().y <= pColliderComponent0->GetBottomRight().y;
-		}
+		static bool IsCollision(const ColliderComponent* pColliderComponent0,
+		                        const ColliderComponent* pColliderComponent1);
 	};
 }

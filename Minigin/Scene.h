@@ -1,5 +1,9 @@
 #pragma once
 #include "SceneManager.h"
+#include <memory>
+#include <string>
+#include <vector>
+#include "Component.h"
 
 namespace e
 {

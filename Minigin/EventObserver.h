@@ -1,12 +1,11 @@
 #pragma once
-class Event;
-
 namespace e
 {
-	class EventObserver
+	struct Event;
+	class EventObserver abstract
 	{
 	public:
-		virtual ~EventObserver() = default;;
+		virtual ~EventObserver() = 0;;
 		virtual void Observe(const Event& event) = 0;
 	};
 }

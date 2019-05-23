@@ -40,6 +40,9 @@
     <Filter Include="Events">
       <UniqueIdentifier>{5fe020d7-0f6a-446a-835e-cd710b39afc0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Utility">
+      <UniqueIdentifier>{dff406a3-0c86-4904-83e1-d8abbbe724ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Component.h">
@@ -56,9 +59,6 @@
     </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="FPSComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="MiniginPCH.h">
       <Filter>Main</Filter>
@@ -144,6 +144,12 @@
     <ClInclude Include="RenderableComponent.h">
       <Filter>Components\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="StateComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSComponent.h">
+      <Filter>Components\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -153,9 +159,6 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="TransformComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="FPSComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
@@ -217,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="RenderableComponent.cpp">
       <Filter>Components\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSComponent.cpp">
+      <Filter>Components\Utility</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -7,11 +7,7 @@ namespace e
 	using namespace std;
 	void BodyComponent::WakeUp(const GameObject* pParent)
 	{
-		if (TransformComponent* pTransformComponent = pParent->GetpComponent<TransformComponent>())
-		{
-			m_pTransformComponent = pTransformComponent;
-		}
-		else throw runtime_error("Make sure each BodyComponent has a TransformComponent sibling!");
+		m_pTransformComponent = pParent->GetpComponent<TransformComponent>("Make sure each BodyComponent has a TransformComponent sibling!");
 	}
 
 	void BodyComponent::Update(const GameObject*)

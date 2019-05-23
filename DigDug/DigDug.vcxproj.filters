@@ -1,20 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Characters">
       <UniqueIdentifier>{c8444cee-1808-442e-bb7e-4324cdb0cb12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Others">
+      <UniqueIdentifier>{c60d8d1f-077a-4f09-bc14-0d77a13b2013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\States">
+      <UniqueIdentifier>{c3c6ffec-dd6e-4bc6-8af6-8af560016e00}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -22,6 +16,15 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="TaizoHoriComponent.cpp">
       <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthDisplayComponent.cpp">
+      <Filter>Others</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultStateComponent.cpp">
+      <Filter>Characters\States</Filter>
+    </ClCompile>
+    <ClCompile Include="DieStateComponent.cpp">
+      <Filter>Characters\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -32,5 +35,15 @@
     <ClInclude Include="TaizoHoriComponent.h">
       <Filter>Characters</Filter>
     </ClInclude>
+    <ClInclude Include="HealthDisplayComponent.h">
+      <Filter>Others</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultStateComponent.h">
+      <Filter>Characters\States</Filter>
+    </ClInclude>
+    <ClInclude Include="DieStateComponent.h">
+      <Filter>Characters\States</Filter>
+    </ClInclude>
+    <ClInclude Include="DigDugComponents.h" />
   </ItemGroup>
 </Project>

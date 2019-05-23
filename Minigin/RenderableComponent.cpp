@@ -2,6 +2,7 @@
 #include "RenderableComponent.h"
 #include "ResourceManager.h"
 #include "Canvas.h"
+
 namespace e
 {
 	using namespace std;
@@ -19,8 +20,7 @@ namespace e
 	}
 	void RenderableComponent::WakeUp(const GameObject* pParent)
 	{
-		m_pTransformComponent = pParent->GetpComponent<TransformComponent>();
-		if (m_pTransformComponent == nullptr) throw runtime_error("RenderableComponent(texture/tilemap) needs a TransformComponent");
+		m_pTransformComponent = pParent->GetpComponent<TransformComponent>("RenderableComponent(texture/tilemap) needs a TransformComponent");
 	}
 	const SPoint& RenderableComponent::GetPosition() const
 	{

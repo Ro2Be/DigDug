@@ -1,9 +1,9 @@
 #pragma once
 namespace e
 {
-	class Event;
+	struct Event;
 	class EventObserver;
-	class EventNotifier
+	class EventNotifier final
 	{
 	public:
 		EventNotifier() = default;

@@ -2,8 +2,9 @@
 #include "../Minigin/Game.h"
 #include "TaizoHoriComponent.h"
 #include "GameObject.h"
-#include "ColliderComponent.h"
-#include "TileMapComponent.h"
+#include "Components.h"
+#include "DigDugComponents.h"
+
 using namespace std;
 
 //main function defined at the bottom of this file
@@ -22,10 +23,11 @@ public:
 
 		//ADD RESOURCES
 		e::ResourceManager& resourceManager{ e::ResourceManager::GetInstance() };
-		resourceManager.AddAnimation("Fygar",		"DigDug256x256(RippedByMisterMan).png", 200.f, { { 0, 24, 16, 16 }, { 16, 24, 16, 16 } });
-		resourceManager.AddAnimation("TaizoHori",	"DigDug256x256(RippedByMisterMan).png", 200.f, { { 0, 48, 16, 16 }, { 16, 48, 16, 16 } });
-		resourceManager.AddTexture("Rock",			"DigDug256x256(RippedByMisterMan).png", { { 0, 80, 16, 16 } });
-		resourceManager.AddTexture("TileMap",		"DigDug256x256(RippedByMisterMan).png");
+		resourceManager.AddAnimation("Fygar",				"DigDug256x256(RippedByMisterMan).png", 200.f, { { 00, 24, 16, 16 }, { 16, 24, 16, 16 } });
+		resourceManager.AddAnimation("TaizoHoriDefault",	"DigDug256x256(RippedByMisterMan).png", 200.f, { { 00, 48, 16, 16 }, { 16, 48, 16, 16 } });
+		resourceManager.AddAnimation("TaizoHoriDie",		"DigDug256x256(RippedByMisterMan).png", 200.f, { { 48, 48, 16, 16 }, { 64, 48, 16, 16 }, { 80, 48, 16, 16 }, { 96, 48, 16, 16 } });
+		resourceManager.AddTexture("Rock",					"DigDug256x256(RippedByMisterMan).png", { { 0, 80, 16, 16 } });
+		resourceManager.AddTexture("TileMap",				"DigDug256x256(RippedByMisterMan).png");
 		unsigned char tileMap[32][28]
 		{
 			{ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
@@ -82,15 +84,17 @@ public:
 		//	new e::AnimationComponent("Pookah") });
 		spScene->AddGameObject("Fygar", {
 			new e::TransformComponent(120, 20, 1.9f),
-			new e::TextureComponent("TaizoHori"),
+			new e::TextureComponent("Fygar"),
 			new e::AnimatorComponent("Fygar"),
 			new e::ColliderComponent("Enemy") });
 		spScene->AddGameObject("TaizoHori", {
 			new e::TransformComponent(120, 120, 1.9f),
-			new e::TextureComponent("TaizoHori"),
-			new e::AnimatorComponent("TaizoHori"),
+			new e::TextureComponent("TaizoHoriDefault"),
+			new e::AnimatorComponent(vector<string>{ "TaizoHoriDefault", "TaizoHoriDie" }),
 			new e::ColliderComponent("Player"),
-			new TaizoHoriComponent() });		
+			new TaizoHoriComponent(),
+			new Character::DefaultStateComponent(),
+			new Character::DieStateComponent() });
 		spScene->AddGameObject("Rock", {
 			new e::TransformComponent(240, 240, 1.9f),
 			new e::TextureComponent("Rock"),
@@ -114,7 +118,7 @@ int main()
 {
 	#pragma warning( pop )
 	const e::Game::Settings settings{ "DigDug", { 640, 480 }, 60.f };
-	DigDug game{ settings };
+	const DigDug game{ settings };
 	game.Run();
 	return 0;
 }

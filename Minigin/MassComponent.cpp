@@ -8,8 +8,8 @@ namespace e
 		m_Mass{ mass }
 	{
 	}
-	void MassComponent::WakeUp(const GameObject * pParent)
+	void MassComponent::WakeUp(const GameObject* pParent)
 	{
-		if (pParent->GetpComponent<BodyComponent>()) throw runtime_error(string("Make sure each MassComponent has a BodyComponent sibling!"));
+		pParent->GetpComponent<BodyComponent>("Make sure each MassComponent has a BodyComponent sibling!");
 	}
 }
