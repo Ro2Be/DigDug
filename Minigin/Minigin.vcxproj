@@ -199,6 +199,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClInclude Include="Components.h" />
     <ClInclude Include="Const.h" />
     <ClInclude Include="Controller.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventObserver.h" />
     <ClInclude Include="EventNotifier.h" />
@@ -232,6 +233,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y</Com
     <ClCompile Include="BodyComponent.cpp" />
     <ClCompile Include="Chrono.cpp" />
     <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EventNotifier.cpp" />
     <ClCompile Include="ForceFieldComponent.cpp" />
     <ClCompile Include="FPSComponent.cpp" />

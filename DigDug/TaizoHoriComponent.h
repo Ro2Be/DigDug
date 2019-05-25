@@ -1,21 +1,23 @@
 #pragma once
 #include <Component.h>
 #include "Event.h"
+#include "AnimatorComponent.h"
 #include "ColliderComponent.h"
-#include "StateComponent.h"
 //COMPONENT
 
-class TaizoHoriComponent final : public e::Component
+class TaizoHoriComponent final : public e::Component, public e::CollisionHandler
 {
 public:
 	//FUNCTIONS
 	TaizoHoriComponent() = default;
-	~TaizoHoriComponent() override = default;
-	virtual void WakeUp(const e::GameObject* pParent) override;
-	virtual void Update(const e::GameObject*) override;
+	virtual ~TaizoHoriComponent() override = default;
+	virtual void WakeUp(const e::GameObject* pGameObject) override;
+	virtual void Update(const e::GameObject* pGameObject) override;
+	virtual void HandleCollision(const e::GameObject* pGameObject, const e::GameObject* pOther) override;
 private:
 	//VARIABLES
 	e::EventNotifier m_Notifier;
+	e::ColliderComponent* m_pColliderComponent;
 };
 
 //EVENTS

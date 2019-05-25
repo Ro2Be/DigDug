@@ -20,30 +20,57 @@
     <ClCompile Include="HealthDisplayComponent.cpp">
       <Filter>Others</Filter>
     </ClCompile>
+    <ClCompile Include="DieStateComponent.cpp">
+      <Filter>Characters\States</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackStateComponent.cpp">
+      <Filter>Characters\States</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponComponent.cpp">
+      <Filter>Others</Filter>
+    </ClCompile>
+    <ClCompile Include="GhostStateComponent.cpp">
+      <Filter>Characters\States</Filter>
+    </ClCompile>
+    <ClCompile Include="FygarComponent.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
     <ClCompile Include="DefaultStateComponent.cpp">
       <Filter>Characters\States</Filter>
     </ClCompile>
-    <ClCompile Include="DieStateComponent.cpp">
-      <Filter>Characters\States</Filter>
+    <ClCompile Include="PookahComponent.cpp">
+      <Filter>Characters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Pookah.h">
-      <Filter>Characters</Filter>
-    </ClInclude>
     <ClInclude Include="TaizoHoriComponent.h">
       <Filter>Characters</Filter>
     </ClInclude>
     <ClInclude Include="HealthDisplayComponent.h">
       <Filter>Others</Filter>
     </ClInclude>
-    <ClInclude Include="DefaultStateComponent.h">
-      <Filter>Characters\States</Filter>
-    </ClInclude>
     <ClInclude Include="DieStateComponent.h">
       <Filter>Characters\States</Filter>
     </ClInclude>
     <ClInclude Include="DigDugComponents.h" />
+    <ClInclude Include="AttackStateComponent.h">
+      <Filter>Characters\States</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponComponent.h">
+      <Filter>Others</Filter>
+    </ClInclude>
+    <ClInclude Include="GhostStateComponent.h">
+      <Filter>Characters\States</Filter>
+    </ClInclude>
+    <ClInclude Include="FygarComponent.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultStateComponent.h">
+      <Filter>Characters\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PookahComponent.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

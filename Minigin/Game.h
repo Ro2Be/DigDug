@@ -21,11 +21,12 @@ namespace e
 		virtual ~Game() = default;
 		void Run() const;
 		const Settings& GetSettings() const;
+		static bool m_Quit; //TODO PUT THIS TO PRIVATE
+		static bool m_Pause; //TODO PUT THIS TO PRIVATE
 	protected:
 		virtual void Load() const = 0;
 	private:
 		//VARIABLES
-		static bool m_Quit;
 		Settings m_Settings;
 		//FUNCTIONS
 		void Initialize() const;

@@ -20,4 +20,8 @@ namespace e
 		m_spScenes.push_back(spScene);
 		return spScene;
 	}
+	std::shared_ptr<Scene> SceneManager::GetspActiveScene()
+	{
+		return m_spScenes[m_ActiveSceneIndex];
+	}
 }

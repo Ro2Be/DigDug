@@ -19,6 +19,12 @@ namespace e
 		FVector operator*(const float& f) const;
 		FVector& operator*=(const float& f);
 	};
+	struct FPolarVector
+	{
+		float radius;
+		float angle;
+		FPolarVector(float radius, float angle);
+	};
 	struct IVector
 	{
 		int x;
@@ -33,9 +39,16 @@ namespace e
 	{
 		short x;
 		short y;
-		//SVector(int x, int y) : x{ x }, y{ y } {}
+		SVector();
+		SVector(short x, short y);
+		SVector(FPolarVector fPolarVector);
+		float SqrRadius() const;
+		float Radius() const;
+		float Angle() const;
 		SVector operator+(const SVector& v) const;
 		SVector& operator+=(const SVector& v);
+		SVector operator-(const SVector& v) const;
+		SVector& operator-=(const SVector& v);
 		SVector operator*(const short& i) const;
 		SVector& operator*=(const short& i);
 	};
@@ -63,6 +76,9 @@ namespace e
 		//SPoint(int x, int y) : x{ x }, y{ y } {}
 		SPoint operator+(const SVector& v) const;
 		SPoint& operator+=(const SVector& v);
+		SPoint operator-(const SVector& v) const;
+		SPoint& operator-=(const SVector& v);
+		SVector operator-(const SPoint& p) const;
 	};
 	struct Frame
 	{

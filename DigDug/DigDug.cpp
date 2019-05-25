@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "../Minigin/Game.h"
-#include "TaizoHoriComponent.h"
 #include "GameObject.h"
 #include "Components.h"
 #include "DigDugComponents.h"
@@ -23,11 +22,19 @@ public:
 
 		//ADD RESOURCES
 		e::ResourceManager& resourceManager{ e::ResourceManager::GetInstance() };
-		resourceManager.AddAnimation("Fygar",				"DigDug256x256(RippedByMisterMan).png", 200.f, { { 00, 24, 16, 16 }, { 16, 24, 16, 16 } });
+		resourceManager.AddAnimation("FygarDefault",		"DigDug256x256(RippedByMisterMan).png", 200.f, { { 00, 24, 16, 16 }, { 16, 24, 16, 16 } });
+		resourceManager.AddAnimation("FygarGhost",			"DigDug256x256(RippedByMisterMan).png", 200.f, { { 80, 24, 16, 16 }, { 96, 24, 16, 16 } });
+		resourceManager.AddAnimation("FygarDie",			"DigDug256x256(RippedByMisterMan).png", 200.f, { { 48, 24, 16, 16 }, { 64, 24, 16, 16 } });
+		resourceManager.AddAnimation("FygarWeapon",			"DigDug256x256(RippedByMisterMan).png", 200.f, { { 160, 144, 16, 16 }, { 176, 144, 32, 16 }, { 208, 144, 48, 16 } });
+		resourceManager.AddAnimation("PookahDefault",		"DigDug256x256(RippedByMisterMan).png", 200.f, { { 00, 00, 16, 16 }, { 16, 00, 16, 16 } });
+		resourceManager.AddAnimation("PookahGhost",			"DigDug256x256(RippedByMisterMan).png", 200.f, { { 80, 00, 16, 16 }, { 96, 00, 16, 16 } });
+		resourceManager.AddAnimation("PookahDie",			"DigDug256x256(RippedByMisterMan).png", 200.f, { { 48, 00, 16, 16 }, { 64, 00, 16, 16 } });
 		resourceManager.AddAnimation("TaizoHoriDefault",	"DigDug256x256(RippedByMisterMan).png", 200.f, { { 00, 48, 16, 16 }, { 16, 48, 16, 16 } });
 		resourceManager.AddAnimation("TaizoHoriDie",		"DigDug256x256(RippedByMisterMan).png", 200.f, { { 48, 48, 16, 16 }, { 64, 48, 16, 16 }, { 80, 48, 16, 16 }, { 96, 48, 16, 16 } });
+		resourceManager.AddAnimation("TaizoHoriWeapon",		"DigDug256x256(RippedByMisterMan).png", 200.f, { { 208, 160, 16, 16 }, { 192, 160, 32, 16 }, { 176, 160, 48, 16 } });
 		resourceManager.AddTexture("Rock",					"DigDug256x256(RippedByMisterMan).png", { { 0, 80, 16, 16 } });
 		resourceManager.AddTexture("TileMap",				"DigDug256x256(RippedByMisterMan).png");
+		
 		unsigned char tileMap[32][28]
 		{
 			{ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
@@ -68,7 +75,8 @@ public:
 		shared_ptr<e::Scene> spScene = e::SceneManager::GetInstance().CreateScene("Demo");
 		spScene->AddGameObject("BackGround", {
 			new e::TransformComponent(50, 0, 1.9f),
-			new e::TileMapComponent<32, 28>("TileMap", e::TileSet({ 0, 216 }, { 8, 8}, 40, 8), tileMap) });
+			new e::TileMapComponent<32, 28>("TileMap", e::TileSet({ 0, 216 }, { 8, 8 }, 40, 8), tileMap), 
+			new HealthDisplayComponent() });
 		spScene->AddGameObject("Title", {
 			new e::TransformComponent(60, 10),
 			new e::TextureComponent(),
@@ -78,23 +86,46 @@ public:
 			new e::TextureComponent(),
 			new e::TextComponent("", "Emulogic.ttf", 15, e::colors::yellow),
 			new e::FPSComponent() });
-		//spScene->AddGameObject("Pookah", {
-		//	new e::TransformComponent(20, 20, 3.f),
-		//	new e::TextureComponent(),
-		//	new e::AnimationComponent("Pookah") });
+		spScene->AddGameObject("Pookah", {
+			new e::TransformComponent(220, 40, 1.9f),
+			new e::TextureComponent("PookahDefault"),
+			new e::AnimatorComponent(),
+			new e::ColliderComponent("Enemy"),
+			new PookahComponent(),
+			new Character::DefaultStateComponent(resourceManager.GetpAnimation("PookahDefault")),
+			new Character::GhostStateComponent(resourceManager.GetpAnimation("PookahGhost")),
+			new Character::DieStateComponent(resourceManager.GetpAnimation("PookahDie")) });
+		spScene->AddGameObject("FygarWeapon", {
+			new e::TransformComponent(),
+			new e::TextureComponent("FygarWeapon"),
+			new e::AnimatorComponent("FygarWeapon"),
+			new e::ColliderComponent("Enemy"),
+			new WeaponComponent() });
 		spScene->AddGameObject("Fygar", {
 			new e::TransformComponent(120, 20, 1.9f),
-			new e::TextureComponent("Fygar"),
-			new e::AnimatorComponent("Fygar"),
-			new e::ColliderComponent("Enemy") });
+			new e::TextureComponent("FygarDefault"),
+			new e::AnimatorComponent(),
+			new e::ColliderComponent("Enemy"),
+			//new FygarComponent(),
+			new Character::DefaultStateComponent(resourceManager.GetpAnimation("FygarDefault")),
+			new Character::AttackStateComponent("FygarWeapon"),
+			new Character::GhostStateComponent(resourceManager.GetpAnimation("FygarGhost")),
+			new Character::DieStateComponent(resourceManager.GetpAnimation("FygarDie")) });
+		spScene->AddGameObject("TaizoHoriWeapon", {
+			new e::TransformComponent(),
+			new e::TextureComponent("TaizoHoriWeapon"),
+			new e::AnimatorComponent("TaizoHoriWeapon"),
+			new e::ColliderComponent("Friend"),
+			new WeaponComponent() });
 		spScene->AddGameObject("TaizoHori", {
 			new e::TransformComponent(120, 120, 1.9f),
 			new e::TextureComponent("TaizoHoriDefault"),
-			new e::AnimatorComponent(vector<string>{ "TaizoHoriDefault", "TaizoHoriDie" }),
+			new e::AnimatorComponent(),
 			new e::ColliderComponent("Player"),
 			new TaizoHoriComponent(),
-			new Character::DefaultStateComponent(),
-			new Character::DieStateComponent() });
+			new Character::DefaultStateComponent(resourceManager.GetpAnimation("TaizoHoriDefault")),
+			new Character::AttackStateComponent("TaizoHoriWeapon"),
+			new Character::DieStateComponent(resourceManager.GetpAnimation("TaizoHoriDie")) });
 		spScene->AddGameObject("Rock", {
 			new e::TransformComponent(240, 240, 1.9f),
 			new e::TextureComponent("Rock"),
@@ -107,6 +138,7 @@ public:
 		inputManager.GetKeyboard().AddCommand(DWORD(e::Keyboard::Key::S), true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({  0, playerSpeed }));
 		inputManager.GetKeyboard().AddCommand(DWORD(e::Keyboard::Key::D), true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({  playerSpeed,  0 }));
 		inputManager.GetKeyboard().AddCommand(DWORD(e::Keyboard::Key::W), true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({  0, -playerSpeed }));
+		inputManager.GetKeyboard().AddCommand(DWORD(e::Keyboard::Key::E), true, new Character::AttackCommand(spScene->GetGameObject("TaizoHori")));
 		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::LEFT ), true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ -playerSpeed,  0 }));
 		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::DOWN ), true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ 0, playerSpeed }));
 		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::RIGHT), true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ playerSpeed,  0 }));

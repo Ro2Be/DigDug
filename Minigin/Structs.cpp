@@ -30,6 +30,11 @@ namespace e
 		y *= f;
 		return *this;
 	}
+	FPolarVector::FPolarVector(float radius, float angle) :
+		radius{ radius },
+		angle{ angle }
+	{
+	}
 	//IVECTOR
 	IVector IVector::operator+(const IVector& v) const
 	{
@@ -51,6 +56,35 @@ namespace e
 		y *= i;
 		return *this;
 	}
+	SVector::SVector() :
+		x{ 0 },
+		y{ 0 }
+	{
+	}
+	SVector::SVector(short x, short y) : 
+		x{ x }, 
+		y{ y }
+	{
+	}
+	SVector::SVector(FPolarVector fPolarVector) :
+		x{ short(fPolarVector.radius * cos(fPolarVector.angle)) },
+		y{ short(fPolarVector.radius * sin(fPolarVector.angle)) }
+	{
+	}
+	float SVector::SqrRadius() const
+	{
+		const float fx{ float(x) };
+		const float fy{ float(y) };
+		return fx * fx + fy * fy;
+	}
+	float SVector::Radius() const
+	{
+		return sqrt(SqrRadius());
+	}
+	float SVector::Angle() const
+	{
+		return atan2(float(y), float(x));
+	}
 	//SVECTOR
 	SVector SVector::operator+(const SVector& v) const
 	{
@@ -60,6 +94,16 @@ namespace e
 	{
 		x += v.x;
 		y += v.y;
+		return *this;
+	}
+	SVector SVector::operator-(const SVector& v) const
+	{
+		return { x - v.x, y - v.y };
+	}
+	SVector& SVector::operator-=(const SVector& v)
+	{
+		x -= v.x;
+		y -= v.y;
 		return *this;
 	}
 	SVector SVector::operator*(const short& i) const
@@ -109,5 +153,19 @@ namespace e
 		x += v.x;
 		y += v.y;
 		return *this;
+	}
+	SPoint SPoint::operator-(const SVector& v) const
+	{
+		return { x - v.x, y - v.y };
+	}
+	SPoint& SPoint::operator-=(const SVector& v)
+	{
+		x -= v.x;
+		y -= v.y;
+		return *this;
+	}
+	SVector SPoint::operator-(const SPoint& p) const
+	{
+		return { x - p.x, y - p.y };
 	}
 }

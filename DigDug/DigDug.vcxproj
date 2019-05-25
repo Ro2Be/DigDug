@@ -75,9 +75,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -163,17 +167,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AttackStateComponent.h" />
     <ClInclude Include="DieStateComponent.h" />
     <ClInclude Include="DigDugComponents.h" />
+    <ClInclude Include="FygarComponent.h" />
+    <ClInclude Include="GhostStateComponent.h" />
     <ClInclude Include="HealthDisplayComponent.h" />
     <ClInclude Include="DefaultStateComponent.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Pookah.h" />
+    <ClInclude Include="PookahComponent.h" />
     <ClInclude Include="TaizoHoriComponent.h" />
+    <ClInclude Include="WeaponComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AttackStateComponent.cpp" />
     <ClCompile Include="DieStateComponent.cpp" />
     <ClCompile Include="DigDug.cpp" />
+    <ClCompile Include="FygarComponent.cpp" />
+    <ClCompile Include="GhostStateComponent.cpp" />
     <ClCompile Include="HealthDisplayComponent.cpp" />
     <ClCompile Include="DefaultStateComponent.cpp" />
     <ClCompile Include="pch.cpp">
@@ -182,7 +193,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PookahComponent.cpp" />
     <ClCompile Include="TaizoHoriComponent.cpp" />
+    <ClCompile Include="WeaponComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

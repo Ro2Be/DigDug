@@ -1,6 +1,5 @@
 #pragma once
 #include "Component.h"
-#include <vector>
 #include "TextureComponent.h"
 
 namespace e
@@ -9,20 +8,17 @@ namespace e
 	class AnimatorComponent final : public Component
 	{
 	public:
+		AnimatorComponent();
 		explicit AnimatorComponent(const std::string& animation);
-		explicit AnimatorComponent(const std::vector<std::string>& animations);
 		virtual void WakeUp(const GameObject* pParent) override;
 		virtual void Update(const GameObject* pParent) override;
-		void FlipHorizontal() const;
-		void FlipVertical() const;
 		void SetFrame(const unsigned char frameIndex);
-		void SetAnimation(const unsigned char animationIndex);
+		void SetAnimation(Animation* pAnimation);
 		Animation* GetpAnimation() const;
 	private:
 		TextureComponent* m_pTextureComponent;
-		unsigned char m_FrameIndex;
-		unsigned char m_AnimationIndex;
+		Animation* m_pAnimation;
 		float m_Timer;
-		std::vector<Animation*> m_pAnimations;
+		unsigned char m_FrameIndex;
 	};
 }

@@ -1,0 +1,12 @@
+﻿  pch.cpp
+  AttackStateComponent.cpp
+  DieStateComponent.cpp
+  DigDug.cpp
+  FygarComponent.cpp
+  HealthDisplayComponent.cpp
+  DefaultStateComponent.cpp
+  TaizoHoriComponent.cpp
+  Generating code
+  All 2459 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  DigDug.vcxproj -> C:\Users\d-rob\Documents\GitHub\DigDug\x64\Release\DigDug.exe

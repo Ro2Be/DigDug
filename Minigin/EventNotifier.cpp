@@ -1,14 +1,14 @@
 #include "MiniginPCH.h"
-#include "EventNotifier.h"
-#include "EventObserver.h"
+#include "Event.h"
 
 namespace e
 {
 	using namespace std;
 
-	void EventNotifier::Notify(const Event& event)
+	void EventNotifier::Notify(Event* pEvent)
 	{
-		for (EventObserver* pObserver : m_pObservers) pObserver->Observe(event);
+		for (EventObserver* pObserver : m_pObservers) pObserver->Observe(pEvent);
+		delete pEvent;
 	}
 	void EventNotifier::AddObserver(EventObserver* pObserver)
 	{

@@ -2,6 +2,8 @@
 #include <thread>
 #include "Game.h"
 #include "Canvas.h"
+#include "Engine.h"
+#include <thread>
 
 namespace e
 {
@@ -9,6 +11,7 @@ namespace e
 
 	float Game::dt{ 0 };
 	bool Game::m_Quit{ false };
+	bool Game::m_Pause{ false };
 
 	void Game::Quit()
 	{
@@ -27,8 +30,12 @@ namespace e
 
 	void Game::Run() const
 	{
+		thread engine(Engine::Loop); //REMOVE TO RUN WITHOUT ENGINE INTERFACE
 		Initialize();
 		GameLoop();
+		Canvas::GetInstance().Destroy(); //MAYBE MOVE TO TERMINATE
+		cout << "PRESS ENTER TO END TO CLOSE THE ENGINE";
+		engine.join(); //REMOVE TO RUN WITHOUT ENGINE INTERFACE
 		Terminate();
 	}
 
@@ -48,16 +55,18 @@ namespace e
 		Chrono chrono{};
 		while (!m_Quit)
 		{
-			inputManager.HandleInputEvents();
-			sceneManager.Update();
-			canvas.Render();
+			if (!m_Pause)
+			{
+				inputManager.HandleInputEvents(); //TODO GET THIS OUT THE IF STATEMENT, BUT DONT HANDLE INPUT WHILE IN PAUSE
+				sceneManager.Update();
+				canvas.Render();
+			}
 			Sleep(1000.f / m_Settings.targetFrameRate - chrono.Get());
 			dt = chrono.GetSet();
 		}
 	}
 	void Game::Terminate()
 	{
-		Canvas::GetInstance().Destroy();
 		SDL_Quit();
 	}
 	void Game::Sleep(float milliseconds)

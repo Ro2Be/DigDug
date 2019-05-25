@@ -1,5 +1,6 @@
 #pragma once
-#include <map>
+#include "Component.h"
+
 namespace e
 {
 	class Component;
@@ -36,6 +37,15 @@ namespace e
 			for (Component* pC : m_pComponents)
 			{
 				if (T* pT{ dynamic_cast<T*>(pC) }) return pT;
+			}
+			throw std::runtime_error(errorMessage);
+		}
+		template<class T>
+		T* GetpActiveComponent(const std::string& errorMessage) const
+		{
+			for (Component* pC : m_pComponents)
+			{
+				if (pC->isActive) if (T* pT{ dynamic_cast<T*>(pC) }) return pT;
 			}
 			throw std::runtime_error(errorMessage);
 		}

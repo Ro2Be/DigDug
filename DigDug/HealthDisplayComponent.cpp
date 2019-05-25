@@ -3,17 +3,22 @@
 #include "Event.h"
 #include "TaizoHoriComponent.h"
 #include <iostream>
+#include "DieStateComponent.h"
+using namespace std;
+
+HealthDisplayComponent* HealthDisplayComponent::pHealthDisplayComponent{ nullptr };
 
 void HealthDisplayComponent::WakeUp(const e::GameObject*)
 {
+	
 }
 void HealthDisplayComponent::Update(const e::GameObject*)
 {
 }
-void HealthDisplayComponent::Observe(const e::Event& event)
+void HealthDisplayComponent::Observe(const e::Event* pEvent)
 {
-	if (dynamic_cast<const DeathEvent*>(&event))
+	if (const Character::DeathEvent* pDeathEvent = dynamic_cast<const Character::DeathEvent*>(pEvent))
 	{
-		std::cout << "Loose a life\n";
+		if (pDeathEvent->pGameObject->GetpComponent<TaizoHoriComponent>()) cout << "Taizo Died";
 	}
 }

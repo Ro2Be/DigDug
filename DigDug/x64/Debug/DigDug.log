@@ -1,9 +1,8 @@
 ﻿  pch.cpp
+  AttackStateComponent.cpp
   DieStateComponent.cpp
-c:\users\d-rob\documents\github\digdug\digdug\diestatecomponent.cpp(11): warning C4100: 'pGameObject': unreferenced formal parameter
-c:\users\d-rob\documents\github\digdug\digdug\diestatecomponent.cpp(15): warning C4100: 'pGameObject': unreferenced formal parameter
-c:\users\d-rob\documents\github\digdug\digdug\diestatecomponent.cpp(29): warning C4100: 'pGameObject': unreferenced formal parameter
   DigDug.cpp
+  FygarComponent.cpp
   HealthDisplayComponent.cpp
   DefaultStateComponent.cpp
   TaizoHoriComponent.cpp

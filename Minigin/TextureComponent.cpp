@@ -1,5 +1,4 @@
 #include "MiniginPCH.h"
-#include "Components.h"
 #include "ResourceManager.h"
 #include "Canvas.h"
 #include "TransformComponent.h"
@@ -45,12 +44,13 @@ namespace e
 	}
 	void TextureComponent::Draw(SDL_Renderer* pRenderer) const
 	{
-		const SVector size{ GetSize() };
 		SDL_Rect destination;
-		destination.x = m_pTransformComponent->position.x;
-		destination.y = m_pTransformComponent->position.y;
-		destination.w = int(float(m_Frame.source.w) * m_pTransformComponent->scale.x);
-		destination.h = int(float(m_Frame.source.h) * m_pTransformComponent->scale.y);
-		SDL_RenderCopyEx(pRenderer, m_pTexture, &m_Frame.source, &destination, m_pTransformComponent->rotation, &m_Frame.center, SDL_RendererFlip(m_pTransformComponent->flip));
+		const SPoint worldPosition{ m_pTransformComponent->GetWorldPosition() };
+		destination.x = worldPosition.x;
+		destination.y = worldPosition.y;
+		const FVector worldScale{ m_pTransformComponent->GetWorldScale() };
+		destination.w = int(float(m_Frame.source.w) * worldScale.x);
+		destination.h = int(float(m_Frame.source.h) * worldScale.y);
+		SDL_RenderCopyEx(pRenderer, m_pTexture, &m_Frame.source, &destination, m_pTransformComponent->GetWorldRotation(), &m_Frame.center, SDL_RendererFlip(m_pTransformComponent->GetWorldFlip()));
 	}
 }

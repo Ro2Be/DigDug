@@ -150,6 +150,9 @@
     <ClInclude Include="FPSComponent.h">
       <Filter>Components\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -223,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="FPSComponent.cpp">
       <Filter>Components\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

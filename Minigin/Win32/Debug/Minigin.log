@@ -1,17 +1,26 @@
 ﻿  MiniginPCH.cpp
-  AnimationComponent.cpp
+  AnimatorComponent.cpp
+  BodyComponent.cpp
   Chrono.cpp
-  Font.cpp
+  Controller.cpp
+  Engine.cpp
+  EventNotifier.cpp
+  ForceFieldComponent.cpp
   FPSComponent.cpp
   Game.cpp
   GameObject.cpp
+  InputDevice.cpp
   InputManager.cpp
-  Log.cpp
-  Minigin.cpp
+  Keyboard.cpp
+  MassComponent.cpp
   Canvas.cpp
+  RenderableComponent.cpp
   ResourceManager.cpp
   Scene.cpp
   SceneManager.cpp
+  ColliderComponent.cpp
+  Generating Code...
+  Compiling...
   Structs.cpp
   TextComponent.cpp
   TextureComponent.cpp

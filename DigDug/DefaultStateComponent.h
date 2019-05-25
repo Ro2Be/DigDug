@@ -4,18 +4,17 @@
 
 namespace Character
 {
-	class DefaultStateComponent final : public e::StateComponent, public e::CollisionHandler
+	class DefaultStateComponent final : public e::StateComponent
 	{
 	public:
-		explicit DefaultStateComponent() { isActive = true; };
+		explicit DefaultStateComponent(e::Animation* pAnimation);
 		~DefaultStateComponent() override = default;
 		virtual void WakeUp(const e::GameObject* pGameObject) override;
 		virtual void Update(const e::GameObject* pGameObject) override;
-		virtual void HandleCollision(const e::GameObject* pGameObject, const e::GameObject* pOther) override;
 	protected:
 		virtual void Launch(const e::GameObject* pGameObject) override;
 		virtual void Finish(const e::GameObject* pGameObject) override;
 	private:
-		const e::ColliderComponent* m_pColliderComponent;
+		e::Animation* m_pAnimation;
 	};
 }

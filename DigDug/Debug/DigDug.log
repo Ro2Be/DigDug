@@ -1,5 +1,10 @@
 ﻿  pch.cpp
+  AttackStateComponent.cpp
+  DieStateComponent.cpp
   DigDug.cpp
-  Pookah.cpp
+  FygarComponent.cpp
+  HealthDisplayComponent.cpp
+  DefaultStateComponent.cpp
+  TaizoHoriComponent.cpp
   Generating Code...
 LINK : fatal error LNK1104: cannot open file 'Minigin.lib'

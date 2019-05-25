@@ -9,7 +9,7 @@ namespace e
 		EventNotifier() = default;
 		void AddObserver(EventObserver* pObserver);
 		void RemoveObserver(EventObserver* pObserver);
-		void Notify(const Event& event);
+		void Notify(Event* pEvent);
 	private:
 		std::vector<EventObserver*> m_pObservers;
 	};

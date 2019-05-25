@@ -5,7 +5,7 @@ namespace e
 	class EventObserver abstract
 	{
 	public:
-		virtual ~EventObserver() = 0;;
-		virtual void Observe(const Event& event) = 0;
+		virtual ~EventObserver() = default;
+		virtual void Observe(const Event* pEvent) = 0;
 	};
 }

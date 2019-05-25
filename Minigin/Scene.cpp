@@ -18,7 +18,7 @@ namespace e
 	}
 	GameObject* Scene::GetGameObject(const std::string& name)
 	{
-		for (int i{}; i < m_GameObjectNames.size(); ++i)
+		for (size_t i{}; i < m_GameObjectNames.size(); ++i)
 		{
 			if (m_GameObjectNames[i] == name) return &m_GameObjects[i];
 		}

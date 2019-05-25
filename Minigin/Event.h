@@ -6,6 +6,6 @@ namespace e
 {
 	struct Event abstract
 	{
-		virtual ~Event() = 0;
+		virtual ~Event() = default;
 	};
 }
