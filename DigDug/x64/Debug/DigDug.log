@@ -3,8 +3,11 @@
   DieStateComponent.cpp
   DigDug.cpp
   FygarComponent.cpp
+  GhostStateComponent.cpp
   HealthDisplayComponent.cpp
   DefaultStateComponent.cpp
+  PookahComponent.cpp
   TaizoHoriComponent.cpp
+  WeaponComponent.cpp
   Generating Code...
   DigDug.vcxproj -> C:\Users\d-rob\Documents\GitHub\DigDug\x64\Debug\DigDug.exe

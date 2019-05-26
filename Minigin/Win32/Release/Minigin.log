@@ -3,6 +3,7 @@
   BodyComponent.cpp
   Chrono.cpp
   Controller.cpp
+  Engine.cpp
   EventNotifier.cpp
   ForceFieldComponent.cpp
   FPSComponent.cpp
@@ -18,8 +19,8 @@
   Scene.cpp
   SceneManager.cpp
   ColliderComponent.cpp
-  Structs.cpp
   Compiling...
+  Structs.cpp
   TextComponent.cpp
   TextureComponent.cpp
   TransformComponent.cpp

@@ -90,8 +90,8 @@ public:
 			new e::TextComponent("", "Emulogic.ttf", 15, e::colors::yellow),
 			new e::FPSComponent() });
 		LoadLevel0(spGameScene, resourceManager);
-		spGameScene->PrintGameObjectNames();
-		shared_ptr<e::Scene> spMenuScene = e::SceneManager::GetInstance().CreateScene("Menu");
+
+		//shared_ptr<e::Scene> spMenuScene = e::SceneManager::GetInstance().CreateScene("Menu");
 	}
 
 	static void LoadLevel0(const shared_ptr<e::Scene>& spScene, e::ResourceManager& resourceManager)
@@ -150,10 +150,11 @@ public:
 		inputManager.GetKeyboard().AddCommand(DWORD(e::Keyboard::Key::D), true, spScene->GetGameObject("Fygar")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ playerSpeed,  0 }));
 		inputManager.GetKeyboard().AddCommand(DWORD(e::Keyboard::Key::W), true, spScene->GetGameObject("Fygar")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ 0, -playerSpeed }));
 		inputManager.GetKeyboard().AddCommand(DWORD(e::Keyboard::Key::E), true, new Character::AttackCommand(spScene->GetGameObject("Fygar")));
-		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::LEFT), true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ -playerSpeed,  0 }));
-		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::DOWN), true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ 0, playerSpeed }));
-		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::RIGHT), true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ playerSpeed,  0 }));
-		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::UP), true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ 0, -playerSpeed }));
+		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::LEFT),	true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ -playerSpeed,  0 }));
+		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::DOWN),	true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ 0, playerSpeed }));
+		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::RIGHT),	true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ playerSpeed,  0 }));
+		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::UP),		true, spScene->GetGameObject("TaizoHori")->GetpComponent<e::TransformComponent>()->CreateMoveCommand({ 0, -playerSpeed }));
+		inputManager.GetController(0).AddCommand(DWORD(e::Controller::Button::A),		true, new Character::AttackCommand(spScene->GetGameObject("TaizoHori")));
 	}
 };
 
