@@ -1,7 +1,7 @@
 #pragma once
 #include <StateComponent.h>
 #include "Event.h"
-
+#include "AnimatorComponent.h"
 namespace Character
 {
 	struct DeathEvent final : public e::Event
@@ -25,7 +25,7 @@ namespace Character
 		virtual void Launch(const e::GameObject* pGameObject) override;
 		virtual void Finish(const e::GameObject* pGameObject) override;
 	private:
-		float m_Timer;
+		e::AnimatorComponent* m_pAnimatorComponent;
 		e::EventNotifier m_EventNotifier;
 		e::Animation* m_pAnimation;
 	};

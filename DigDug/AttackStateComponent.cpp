@@ -21,9 +21,9 @@ namespace Character
 	void AttackStateComponent::Update(const e::GameObject*)
 	{
 	}
-	void AttackStateComponent::Launch(const e::GameObject*)
+	void AttackStateComponent::Launch(const e::GameObject* pGameObject)
 	{
-		e::SceneManager::GetInstance().GetspActiveScene()->GetGameObject(m_pWeaponName)->GetpComponent<WeaponComponent>()->Fire();
+		e::SceneManager::GetInstance().GetspActiveScene()->GetGameObject(m_pWeaponName)->GetpComponent<WeaponComponent>()->Fire(pGameObject);
 	}
 	void AttackStateComponent::Finish(const e::GameObject*)
 	{

@@ -14,5 +14,7 @@ void TaizoHoriComponent::Update(const e::GameObject* /*pGameObject*/)
 }
 void TaizoHoriComponent::HandleCollision(const e::GameObject* pGameObject, const e::GameObject* /*pOther*/) //ENEMY COLLISION HANDLER
 {
-	pGameObject->GetpActiveComponent<e::StateComponent>("No active state found!")->ChangeState(pGameObject, pGameObject->GetpComponent<Character::DieStateComponent>("Make sure each TaizoHoriComponent has a Character::DieStateComponent sibling!"));
+	e::StateComponent* pStateComponent{ pGameObject->GetpActiveComponent<e::StateComponent>("No active state found!") };
+	Character::DieStateComponent* pDieStateComponent{ pGameObject->GetpComponent<Character::DieStateComponent>("Make sure each TaizoHoriComponent has a Character::DieStateComponent sibling!") };
+	if (pStateComponent != pDieStateComponent) pStateComponent->ChangeState(pGameObject, pDieStateComponent);
 }

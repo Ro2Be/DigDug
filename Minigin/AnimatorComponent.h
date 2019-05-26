@@ -12,13 +12,17 @@ namespace e
 		explicit AnimatorComponent(const std::string& animation);
 		virtual void WakeUp(const GameObject* pParent) override;
 		virtual void Update(const GameObject* pParent) override;
-		void SetFrame(const unsigned char frameIndex);
-		void SetAnimation(Animation* pAnimation);
+		bool GetEndOfAnimation() const;
+		void SetLock(bool lock);
+		void SetFrame(const unsigned char frameIndex, bool loop = true);
+		void SetAnimation(Animation* pAnimation, bool loop = true);
 		Animation* GetpAnimation() const;
 	private:
 		TextureComponent* m_pTextureComponent;
 		Animation* m_pAnimation;
 		float m_Timer;
 		unsigned char m_FrameIndex;
+		bool m_Loop;
+		bool m_Lock;
 	};
 }

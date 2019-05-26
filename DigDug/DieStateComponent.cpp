@@ -2,8 +2,8 @@
 #include "DieStateComponent.h"
 #include "GameObject.h"
 #include "Game.h"
-#include <iostream>
 #include "HealthDisplayComponent.h"
+
 namespace Character
 {
 	using namespace std;
@@ -11,25 +11,26 @@ namespace Character
 		m_pAnimation{ pAnimation }
 	{
 	}
-	void DieStateComponent::WakeUp(const e::GameObject* /*pGameObject*/)
+	void DieStateComponent::WakeUp(const e::GameObject* pGameObject)
 	{
+		m_pAnimatorComponent = pGameObject->GetpComponent<e::AnimatorComponent>("Make sure each DieStateComponent  has a AnimatorComponent sibling!");
 		m_EventNotifier.AddObserver(HealthDisplayComponent::pHealthDisplayComponent);
 	}
 	void DieStateComponent::Update(const e::GameObject* pGameObject)
 	{
-		m_Timer -= e::Game::dt;
-		if (m_Timer <= 0)
+		if (m_pAnimatorComponent->GetEndOfAnimation())
 		{
 			m_EventNotifier.Notify(new DeathEvent(pGameObject));
+			//TODO RESTART LEVEL
 		}
 	}
-	void DieStateComponent::Launch(const e::GameObject* pGameObject)
+	void DieStateComponent::Launch(const e::GameObject* /*pGameObject*/)
 	{
-		e::AnimatorComponent* animatorComponent = pGameObject->GetpComponent<e::AnimatorComponent>("Make sure each DieStateComponent  has a AnimatorComponent sibling!");
-		animatorComponent->SetAnimation(m_pAnimation);
-		m_Timer = animatorComponent->GetpAnimation()->frames.size() * animatorComponent->GetpAnimation()->msPerFrame;
+		m_pAnimatorComponent->SetAnimation(m_pAnimation, false);
+		m_pAnimatorComponent->SetLock(true);
 	}
 	void DieStateComponent::Finish(const e::GameObject* /*pGameObject*/)
 	{
+		m_pAnimatorComponent->SetLock(false);
 	}
 }
